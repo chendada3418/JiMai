@@ -1,6 +1,7 @@
 <template>
   <div class="mybox">
     <span>动画效果</span>
+    <span>测试更新</span>
     <br />
     <button @click="add">动画按钮</button>
     <button @click="fn3('哈哈哈')">对话框</button>
