@@ -33,12 +33,11 @@
       leave-active-class="animated fadeOutLeft"
       leave-to-class
     >
-      <li v-for="(item) in arr" :key="item.id">
-        {{item.val}}
-        <input type="button" @click="add3(item.id)" value="删除" />
+      <li v-for="item in arr" :key="item.id">
+        {{ item.val }}
+        <input type="button" @click="add3(item.id,item.val)" value="删除" />
       </li>
     </transition-group>
-    
 
     <transition
       enter-class
@@ -48,7 +47,7 @@
       leave-active-class="animated fadeOut"
       leave-to-class
     >
-      <div class="toast" v-if="msg">{{msgText}}</div>
+      <div class="toast" v-if="msg">{{ msgText }}</div>
     </transition>
   </div>
 </template>
@@ -62,7 +61,7 @@ export default {
       str: "",
       arr: [],
       msg: false,
-      msgText:'默认的数据'
+      msgText: "默认的数据",
     };
   },
   methods: {
@@ -70,27 +69,31 @@ export default {
       this.a = !this.a;
     },
     add2() {
-      this.arr.push({ val: this.str, id: new Date().getTime() });
-      this.str = "";
-      console.log({ id: new Date().getTime() });
+      if (this.str == "") {
+        alert("请输入要添加的内容");
+      } else {
+        this.arr.push({ val: this.str, id: new Date().getTime() });
+        this.str = "";
+        console.log({ id: new Date().getTime() });
+      }
     },
-    add3(id) {
+    add3(id,val) {
       // var ind = this.arr.findIndex(obj=>obj.id === id);
-      var ind = this.arr.findIndex(obj => {
+      var ind = this.arr.findIndex((obj) => {
         return obj.id === id;
       });
 
       this.arr.splice(ind, 1);
-      console.log(id);
+      console.log(val,id);
     },
     fn3(tit) {
       this.msg = true;
-      this.msgText = tit
+      this.msgText = tit;
       setTimeout(() => {
         this.msg = false;
       }, 1500);
-    }
-  }
+    },
+  },
 };
 </script>
 
